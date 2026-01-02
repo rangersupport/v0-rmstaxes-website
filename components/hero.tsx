@@ -13,44 +13,56 @@ export default function Hero() {
     const video = videoRef.current
     if (!video) return
 
-    video.addEventListener("loadedmetadata", () => setIsLoaded(true))
+    const handleLoadedData = () => {
+      setIsLoaded(true)
+      video.play().catch((error) => {
+        console.log("[v0] Autoplay prevented, adding click listener")
+        document.body.addEventListener(
+          "click",
+          () => {
+            video.play().catch(() => console.log("[v0] Play failed"))
+          },
+          { once: true },
+        )
+      })
+    }
+
+    const handleError = (e: Event) => {
+      console.error("[v0] Video error:", video.error)
+    }
+
+    video.addEventListener("loadeddata", handleLoadedData)
+    video.addEventListener("error", handleError)
 
     return () => {
-      if (video) {
-        video.removeEventListener("loadedmetadata", () => setIsLoaded(true))
-      }
+      video.removeEventListener("loadeddata", handleLoadedData)
+      video.removeEventListener("error", handleError)
     }
   }, [])
 
   return (
-    <section className="relative h-screen flex items-center justify-center overflow-hidden pt-16">
-      <div className="absolute inset-0 w-full h-full">
-        {/* Video Background */}
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      <div className="fixed inset-0 w-full h-full -z-10 overflow-hidden">
         <video
           ref={videoRef}
           autoPlay
           muted
           loop
           playsInline
-          preload="metadata"
+          preload="auto"
           poster="/images/hero-fallback.jpg"
-          className="absolute inset-0 w-full h-full object-cover"
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 min-w-full min-h-full w-full h-full object-cover"
         >
-          {/* HD resolution (1920x1080) - optimized for web */}
-          <source src="https://via.placeholder.com/1920x1080?text=Your+Adobe+Stock+Video" type="video/mp4" />
+          <source src="/videos/hero-background.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
 
-        <div className="absolute inset-0 bg-gradient-to-r from-primary/70 via-primary/50 to-primary/30"></div>
-
-        {/* Additional top fade for header visibility */}
-        <div className="absolute inset-0 bg-gradient-to-b from-primary/40 to-transparent pointer-events-none"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/45 via-primary/35 to-primary/25"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-primary/55 to-transparent pointer-events-none"></div>
       </div>
 
-      {/* Content */}
       <div className="container-custom relative z-10 px-4 md:px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          {/* Left Content - Premium Typography */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center pt-20">
           <div
             className={`space-y-8 transition-all duration-1000 ${isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
           >
@@ -60,7 +72,6 @@ export default function Hero() {
               </span>
             </div>
 
-            {/* Main Headline */}
             <div className="space-y-6">
               <h1 className="text-6xl md:text-7xl font-bold text-white leading-tight text-balance drop-shadow-lg">
                 Master Your{" "}
@@ -74,7 +85,6 @@ export default function Hero() {
               </p>
             </div>
 
-            {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
               <Button
                 asChild
@@ -95,7 +105,6 @@ export default function Hero() {
               </Button>
             </div>
 
-            {/* Trust Indicators with Premium Design */}
             <div className="grid grid-cols-3 gap-6 pt-12">
               <div className="bg-white/10 backdrop-blur-sm p-4 rounded-xl border border-white/20">
                 <p className="text-4xl font-bold text-yellow-300 mb-1">30+</p>
@@ -112,14 +121,12 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Right - Premium Calendly Integration Container */}
           <div
             className={`transition-all duration-1000 delay-300 ${isLoaded ? "opacity-100 translate-x-0" : "opacity-0 translate-x-8"}`}
           >
             <div id="calendly" className="relative">
               <div className="absolute -inset-1 bg-gradient-to-br from-primary/50 to-yellow-300/20 rounded-2xl blur-2xl opacity-60 group-hover:opacity-75 transition duration-1000"></div>
 
-              {/* Main container */}
               <div className="relative bg-white/95 backdrop-blur-xl rounded-2xl p-8 shadow-2xl border border-white/30">
                 <div className="space-y-4">
                   <div className="flex items-center gap-3 mb-6">
@@ -132,7 +139,6 @@ export default function Hero() {
                     a custom strategy.
                   </p>
 
-                  {/* Calendly Embed Container */}
                   <div className="bg-gradient-to-br from-muted to-muted/50 rounded-xl p-6 min-h-96 flex items-center justify-center">
                     <div className="text-center space-y-4">
                       <div className="inline-flex items-center justify-center w-12 h-12 bg-primary/20 rounded-full">
@@ -153,7 +159,6 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Scroll Indicator */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 animate-bounce">
         <div className="w-6 h-10 border-2 border-white/40 rounded-full flex items-start justify-center p-2">
           <div className="w-1 h-2 bg-white/60 rounded-full animate-pulse"></div>

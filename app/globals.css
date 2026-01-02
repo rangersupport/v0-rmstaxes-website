@@ -153,17 +153,21 @@
     @apply max-w-7xl mx-auto;
   }
 
+  /* Updated video hero positioning for fixed background */
   .video-hero-container {
-    @apply relative h-screen overflow-hidden;
+    @apply relative min-h-screen overflow-hidden;
   }
 
   .video-background {
-    @apply absolute inset-0 w-full h-full object-cover;
+    @apply fixed inset-0 w-full h-full -z-10 overflow-hidden;
   }
 
-  /* Updated overlay to use burgundy primary color */
+  .video-background video {
+    @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 min-w-full min-h-full w-full h-full object-cover;
+  }
+
   .video-overlay-dark {
-    @apply absolute inset-0 bg-gradient-to-r from-primary/70 via-primary/50 to-primary/30;
+    @apply absolute inset-0 bg-gradient-to-r from-primary/45 via-primary/35 to-primary/25;
   }
 
   .premium-glass {
