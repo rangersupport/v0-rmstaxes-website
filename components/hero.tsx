@@ -175,7 +175,10 @@ export default function Hero() {
           poster="/images/hero-fallback.jpg"
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 min-w-full min-h-full w-full h-full object-cover"
         >
-          <source src="/videos/hero-background.mp4" type="video/mp4" />
+          <source
+            src="https://res.cloudinary.com/dimddff3a/video/upload/v1767376457/hero-video-compressed_pyx8a1.mp4"
+            type="video/mp4"
+          />
           Your browser does not support the video tag.
         </video>
 
