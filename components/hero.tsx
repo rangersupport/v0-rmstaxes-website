@@ -131,18 +131,18 @@ export default function Hero() {
                 </Button>
               </div>
 
-              <div className="grid grid-cols-3 gap-6 pt-12">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 pt-12">
                 <div className="bg-white/10 backdrop-blur-sm p-4 rounded-xl border border-white/20">
-                  <p className="text-4xl font-bold text-yellow-300 mb-1">30+</p>
-                  <p className="text-sm text-white/80">Years of Experience</p>
+                  <p className="text-3xl md:text-4xl font-bold text-yellow-300 mb-1">30+</p>
+                  <p className="text-xs md:text-sm text-white/80">Years of Experience</p>
                 </div>
                 <div className="bg-white/10 backdrop-blur-sm p-4 rounded-xl border border-white/20">
-                  <p className="text-4xl font-bold text-yellow-300 mb-1">1000+</p>
-                  <p className="text-sm text-white/80">Satisfied Clients</p>
+                  <p className="text-3xl md:text-4xl font-bold text-yellow-300 mb-1">1000+</p>
+                  <p className="text-xs md:text-sm text-white/80">Satisfied Clients</p>
                 </div>
                 <div className="bg-white/10 backdrop-blur-sm p-4 rounded-xl border border-white/20">
-                  <p className="text-4xl font-bold text-yellow-300 mb-1">99%</p>
-                  <p className="text-sm text-white/80">Satisfaction Rate</p>
+                  <p className="text-3xl md:text-4xl font-bold text-yellow-300 mb-1">99%</p>
+                  <p className="text-xs md:text-sm text-white/80">Satisfaction Rate</p>
                 </div>
               </div>
             </div>

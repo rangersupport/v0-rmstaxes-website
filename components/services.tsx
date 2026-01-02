@@ -113,13 +113,13 @@ export default function Services() {
                   >
                     <Icon size={24} />
                   </div>
-                  <CardTitle className="text-primary">{service.title}</CardTitle>
-                  <CardDescription className="text-base">{service.description}</CardDescription>
+                  <CardTitle className="text-primary text-lg md:text-xl">{service.title}</CardTitle>
+                  <CardDescription className="text-sm md:text-base">{service.description}</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-6">
                   <ul className="space-y-2">
                     {service.features.map((feature, i) => (
-                      <li key={i} className="flex items-center gap-2 text-sm text-foreground/70">
+                      <li key={i} className="flex items-center gap-2 text-xs md:text-sm text-foreground/70">
                         <span className="w-1.5 h-1.5 bg-secondary rounded-full flex-shrink-0"></span>
                         {feature}
                       </li>
@@ -128,12 +128,16 @@ export default function Services() {
                   {service.calendlyUrl ? (
                     <Button
                       onClick={() => handleBookConsultation(service.calendlyUrl!)}
-                      className="w-full bg-gradient-to-r from-primary to-accent hover:from-accent hover:to-primary text-white font-semibold shadow-md hover:shadow-lg transition-all duration-300 py-2"
+                      className="w-full bg-gradient-to-r from-primary to-accent hover:from-accent hover:to-primary text-white font-semibold shadow-md hover:shadow-lg transition-all duration-300 py-2 md:py-2.5 text-sm md:text-base"
                     >
                       Book Consultation
                     </Button>
                   ) : (
-                    <Button variant="outline" asChild className="w-full bg-transparent hover:bg-muted">
+                    <Button
+                      variant="outline"
+                      asChild
+                      className="w-full bg-transparent hover:bg-muted text-sm md:text-base py-2 md:py-2.5"
+                    >
                       <Link href="#contact">Learn More</Link>
                     </Button>
                   )}
