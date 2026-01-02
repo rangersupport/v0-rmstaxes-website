@@ -3,7 +3,12 @@
 import { useEffect, useRef, useState } from "react"
 import { Button } from "@/components/ui/button"
 import { ArrowRight } from "lucide-react"
-import Link from "next/link"
+
+declare global {
+  interface Window {
+    Calendly: any
+  }
+}
 
 export default function Hero() {
   const videoRef = useRef<HTMLVideoElement>(null)
@@ -45,122 +50,19 @@ export default function Hero() {
     script.async = true
     document.body.appendChild(script)
     return () => {
-      document.body.removeChild(script)
+      if (document.body.contains(script)) {
+        document.body.removeChild(script)
+      }
     }
   }, [])
 
-  useEffect(() => {
-    const style = document.createElement("style")
-    style.textContent = `
-      /* Calendly Widget Theming - RMS Burgundy Brand */
-      .calendly-inline-widget {
-        --calendly-primary: #8b3a3a;
-        --calendly-primary-hover: #6d2d2d;
-        --calendly-text-primary: #1a1a1a;
-        --calendly-text-secondary: #4a4a4a;
-        --calendly-border: #e0e0e0;
-      }
-
-      /* Button styling - burgundy brand color */
-      .calendly-inline-widget button {
-        background-color: #8b3a3a !important;
-        color: #ffffff !important;
-        border-color: #8b3a3a !important;
-        font-weight: 500;
-      }
-
-      .calendly-inline-widget button:hover {
-        background-color: #6d2d2d !important;
-        border-color: #6d2d2d !important;
-      }
-
-      /* Calendar selected date - burgundy highlight */
-      .calendly-inline-widget [data-attribute="day"][data-selected="true"],
-      .calendly-inline-widget .calendly-selected {
-        background-color: #8b3a3a !important;
-        color: #ffffff !important;
-      }
-
-      /* Calendar hover state */
-      .calendly-inline-widget [data-attribute="day"]:hover {
-        background-color: #f0f0f0 !important;
-      }
-
-      /* Text contrast - dark text on light backgrounds */
-      .calendly-inline-widget {
-        color: #1a1a1a !important;
-      }
-
-      .calendly-inline-widget h2,
-      .calendly-inline-widget h3,
-      .calendly-inline-widget label {
-        color: #1a1a1a !important;
-        font-weight: 600;
-      }
-
-      .calendly-inline-widget p,
-      .calendly-inline-widget span {
-        color: #4a4a4a !important;
-      }
-
-      /* Time slots styling */
-      .calendly-inline-widget [data-test*="time"],
-      .calendly-inline-widget [class*="time"] {
-        color: #1a1a1a !important;
-      }
-
-      /* Links - burgundy color */
-      .calendly-inline-widget a {
-        color: #8b3a3a !important;
-        text-decoration: none;
-      }
-
-      .calendly-inline-widget a:hover {
-        color: #6d2d2d !important;
-        text-decoration: underline;
-      }
-
-      /* Form inputs */
-      .calendly-inline-widget input,
-      .calendly-inline-widget textarea,
-      .calendly-inline-widget select {
-        background-color: #ffffff !important;
-        color: #1a1a1a !important;
-        border-color: #e0e0e0 !important;
-      }
-
-      .calendly-inline-widget input::placeholder,
-      .calendly-inline-widget textarea::placeholder {
-        color: #999999 !important;
-      }
-
-      /* Calendar grid/month header */
-      .calendly-inline-widget [data-test="calendar-month-header"],
-      .calendly-inline-widget [role="heading"] {
-        color: #1a1a1a !important;
-        font-weight: 600;
-      }
-
-      /* Day names */
-      .calendly-inline-widget [data-test*="weekday"],
-      .calendly-inline-widget [class*="weekday"] {
-        color: #4a4a4a !important;
-        font-weight: 500;
-      }
-
-      /* Disabled time slots */
-      .calendly-inline-widget [data-test*="time"][disabled],
-      .calendly-inline-widget [class*="disabled"] {
-        color: #cccccc !important;
-        opacity: 0.6;
-      }
-    `
-    document.head.appendChild(style)
-
-    return () => {
-      document.head.removeChild(style)
+  const handleScheduleConsultation = () => {
+    if (window.Calendly) {
+      window.Calendly.initPopupWidget({
+        url: "https://calendly.com/rmstaxes/15?hide_gdpr_banner=1&primary_color=8b3a3a",
+      })
     }
-  }, [])
+  }
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -213,13 +115,11 @@ export default function Hero() {
 
               <div className="flex flex-col sm:flex-row gap-4 pt-6">
                 <Button
-                  asChild
+                  onClick={handleScheduleConsultation}
                   size="lg"
                   className="bg-white hover:bg-white/90 text-primary font-semibold shadow-lg hover:shadow-xl transition-all"
                 >
-                  <Link href="#calendly-widgets" className="flex items-center gap-2">
-                    Schedule Now <ArrowRight size={20} />
-                  </Link>
+                  Schedule Consultation <ArrowRight size={20} />
                 </Button>
                 <Button
                   asChild
@@ -227,7 +127,7 @@ export default function Hero() {
                   size="lg"
                   className="bg-white/10 hover:bg-white/20 text-white border-white/40 backdrop-blur-sm font-semibold"
                 >
-                  <Link href="#services">Explore Services</Link>
+                  <a href="#services">Explore Services</a>
                 </Button>
               </div>
 
@@ -243,55 +143,6 @@ export default function Hero() {
                 <div className="bg-white/10 backdrop-blur-sm p-4 rounded-xl border border-white/20">
                   <p className="text-4xl font-bold text-yellow-300 mb-1">99%</p>
                   <p className="text-sm text-white/80">Satisfaction Rate</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div
-            id="calendly-widgets"
-            className={`transition-all duration-1000 delay-300 ${isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
-          >
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {/* Consultation Widget */}
-              <div className="relative group">
-                <div className="absolute -inset-1 bg-gradient-to-br from-primary/50 to-yellow-300/20 rounded-xl blur-2xl opacity-60 group-hover:opacity-75 transition duration-1000"></div>
-                <div className="relative bg-white/95 backdrop-blur-xl rounded-xl p-6 shadow-2xl border border-white/30 h-full">
-                  <h3 className="text-lg font-bold text-primary mb-2">Consultation</h3>
-                  <p className="text-sm text-foreground/70 mb-4">30 min • One-on-One</p>
-                  <div
-                    className="calendly-inline-widget"
-                    data-url="https://calendly.com/rmstaxes?hide_gdpr_banner=1&background_color=f5f5f5"
-                    style={{ minWidth: "100%", height: "300px" }}
-                  ></div>
-                </div>
-              </div>
-
-              {/* Taxes Widget */}
-              <div className="relative group">
-                <div className="absolute -inset-1 bg-gradient-to-br from-primary/50 to-yellow-300/20 rounded-xl blur-2xl opacity-60 group-hover:opacity-75 transition duration-1000"></div>
-                <div className="relative bg-white/95 backdrop-blur-xl rounded-xl p-6 shadow-2xl border border-white/30 h-full">
-                  <h3 className="text-lg font-bold text-primary mb-2">Tax Planning</h3>
-                  <p className="text-sm text-foreground/70 mb-4">30 min • One-on-One</p>
-                  <div
-                    className="calendly-inline-widget"
-                    data-url="https://calendly.com/rmstaxes/30min?hide_gdpr_banner=1&background_color=f5f5f5"
-                    style={{ minWidth: "100%", height: "300px" }}
-                  ></div>
-                </div>
-              </div>
-
-              {/* Business Consultations Widget */}
-              <div className="relative group">
-                <div className="absolute -inset-1 bg-gradient-to-br from-primary/50 to-yellow-300/20 rounded-xl blur-2xl opacity-60 group-hover:opacity-75 transition duration-1000"></div>
-                <div className="relative bg-white/95 backdrop-blur-xl rounded-xl p-6 shadow-2xl border border-white/30 h-full">
-                  <h3 className="text-lg font-bold text-primary mb-2">Business Consulting</h3>
-                  <p className="text-sm text-foreground/70 mb-4">1 hour • One-on-One</p>
-                  <div
-                    className="calendly-inline-widget"
-                    data-url="https://calendly.com/rmstaxes/60min?hide_gdpr_banner=1&background_color=f5f5f5"
-                    style={{ minWidth: "100%", height: "300px" }}
-                  ></div>
                 </div>
               </div>
             </div>
