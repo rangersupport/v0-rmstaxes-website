@@ -37,7 +37,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <script src="https://assets.calendly.com/assets/external/widget.js" async defer></script>
+        <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet" />
+        <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
       </head>
       <body className={`font-sans antialiased`}>
         {children}

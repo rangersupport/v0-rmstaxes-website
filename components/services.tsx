@@ -71,15 +71,6 @@ export default function Services() {
       window.Calendly.initPopupWidget({
         url: calendlyUrl,
       })
-    } else {
-      console.warn("[v0] Calendly not yet loaded")
-      setTimeout(() => {
-        if (window.Calendly) {
-          window.Calendly.initPopupWidget({
-            url: calendlyUrl,
-          })
-        }
-      }, 500)
     }
   }
 

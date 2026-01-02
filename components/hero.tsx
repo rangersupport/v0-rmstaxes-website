@@ -49,16 +49,6 @@ export default function Hero() {
       window.Calendly.initPopupWidget({
         url: "https://calendly.com/rmstaxes/15?hide_gdpr_banner=1&primary_color=8b3a3a",
       })
-    } else {
-      console.warn("[v0] Calendly not yet loaded")
-      // Retry after 500ms if not loaded
-      setTimeout(() => {
-        if (window.Calendly) {
-          window.Calendly.initPopupWidget({
-            url: "https://calendly.com/rmstaxes/15?hide_gdpr_banner=1&primary_color=8b3a3a",
-          })
-        }
-      }, 500)
     }
   }
 
