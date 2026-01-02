@@ -66,6 +66,12 @@ export default function Services() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {services.map((service, index) => {
             const Icon = service.icon
+            const calendlyLinks: { [key: number]: string } = {
+              0: "https://calendly.com/rmstaxes/30min?hide_gdpr_banner=1&background_color=8B3A3A", // Tax Planning
+              2: "https://calendly.com/rmstaxes/60min?hide_gdpr_banner=1&background_color=8B3A3A", // Business Consulting
+            }
+            const hasCalendly = calendlyLinks[index]
+
             return (
               <Card key={index} className="hover:shadow-lg transition-shadow border border-border/50">
                 <CardHeader>
@@ -86,9 +92,17 @@ export default function Services() {
                       </li>
                     ))}
                   </ul>
-                  <Button variant="outline" asChild className="w-full bg-transparent">
-                    <Link href="#contact">Learn More</Link>
-                  </Button>
+                  {hasCalendly ? (
+                    <Button asChild className="w-full bg-primary hover:bg-accent text-white font-semibold">
+                      <a href={hasCalendly} target="_blank" rel="noopener noreferrer">
+                        Book Now
+                      </a>
+                    </Button>
+                  ) : (
+                    <Button variant="outline" asChild className="w-full bg-transparent">
+                      <Link href="#contact">Learn More</Link>
+                    </Button>
+                  )}
                 </CardContent>
               </Card>
             )

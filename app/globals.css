@@ -134,6 +134,38 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  /* Add custom Calendly widget styling to match brand colors */
+  .calendly-inline-widget {
+    /* Override Calendly default colors to match RMS burgundy brand */
+  }
+
+  .calendly-inline-widget [data-calendly-button-default] {
+    background-color: #8b3a3a !important;
+  }
+
+  .calendly-inline-widget button,
+  .calendly-inline-widget [role="button"] {
+    background-color: #8b3a3a !important;
+    color: white !important;
+  }
+
+  .calendly-inline-widget a[href*="calendly"] {
+    color: #8b3a3a !important;
+  }
+
+  /* Style Calendly header and interactive elements */
+  .calendly-inline-widget .calendly-header-close-button:hover {
+    background-color: #6d2d2d !important;
+  }
+
+  .calendly-inline-widget [data-test="calendar-month-header"] button:hover {
+    background-color: #8b3a3a !important;
+  }
+
+  .calendly-inline-widget .calendly-selected {
+    background-color: #8b3a3a !important;
+  }
 }
 
 @layer components {

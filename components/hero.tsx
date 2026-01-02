@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react"
 import { Button } from "@/components/ui/button"
-import { ArrowRight, PlayCircle } from "lucide-react"
+import { ArrowRight } from "lucide-react"
 import Link from "next/link"
 
 export default function Hero() {
@@ -130,8 +130,7 @@ export default function Hero() {
               <div className="relative bg-white/95 backdrop-blur-xl rounded-2xl p-8 shadow-2xl border border-white/30">
                 <div className="space-y-4">
                   <div className="flex items-center gap-3 mb-6">
-                    <PlayCircle size={24} className="text-primary" />
-                    <h3 className="text-2xl font-bold text-primary">Schedule Your Free Consultation</h3>
+                    <h3 className="text-2xl font-bold text-primary">Schedule Consultation</h3>
                   </div>
 
                   <p className="text-foreground/70 mb-6">
@@ -139,29 +138,17 @@ export default function Hero() {
                     a custom strategy.
                   </p>
 
-                  <div className="bg-gradient-to-br from-muted to-muted/50 rounded-xl p-6 min-h-96 flex items-center justify-center">
-                    <div className="text-center space-y-4">
-                      <div className="inline-flex items-center justify-center w-12 h-12 bg-primary/20 rounded-full">
-                        <PlayCircle size={24} className="text-primary animate-pulse" />
-                      </div>
-                      <p className="text-sm font-medium text-foreground/60">Calendly booking widget</p>
-                      <p className="text-xs text-foreground/50 max-w-sm">
-                        Replace this placeholder with your Calendly embed code
-                      </p>
-                    </div>
-                  </div>
+                  <div
+                    className="calendly-inline-widget"
+                    data-url="https://calendly.com/rmstaxes?hide_gdpr_banner=1&background_color=8B3A3A"
+                    style={{ minWidth: "320px", height: "700px" }}
+                  ></div>
 
                   <p className="text-xs text-foreground/50 text-center pt-4">Typically responds within 24 hours</p>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 animate-bounce">
-        <div className="w-6 h-10 border-2 border-white/40 rounded-full flex items-start justify-center p-2">
-          <div className="w-1 h-2 bg-white/60 rounded-full animate-pulse"></div>
         </div>
       </div>
     </section>
