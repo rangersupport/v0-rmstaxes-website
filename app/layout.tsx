@@ -36,6 +36,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <script src="https://assets.calendly.com/assets/external/widget.js" async defer></script>
+      </head>
       <body className={`font-sans antialiased`}>
         {children}
         <Analytics />

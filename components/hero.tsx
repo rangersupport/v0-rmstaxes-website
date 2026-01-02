@@ -44,23 +44,21 @@ export default function Hero() {
     }
   }, [])
 
-  useEffect(() => {
-    const script = document.createElement("script")
-    script.src = "https://assets.calendly.com/assets/external/widget.js"
-    script.async = true
-    document.body.appendChild(script)
-    return () => {
-      if (document.body.contains(script)) {
-        document.body.removeChild(script)
-      }
-    }
-  }, [])
-
   const handleScheduleConsultation = () => {
     if (window.Calendly) {
       window.Calendly.initPopupWidget({
         url: "https://calendly.com/rmstaxes/15?hide_gdpr_banner=1&primary_color=8b3a3a",
       })
+    } else {
+      console.warn("[v0] Calendly not yet loaded")
+      // Retry after 500ms if not loaded
+      setTimeout(() => {
+        if (window.Calendly) {
+          window.Calendly.initPopupWidget({
+            url: "https://calendly.com/rmstaxes/15?hide_gdpr_banner=1&primary_color=8b3a3a",
+          })
+        }
+      }, 500)
     }
   }
 
@@ -101,23 +99,23 @@ export default function Hero() {
               </div>
 
               <div className="space-y-6 mt-8">
-                <h1 className="text-6xl md:text-7xl font-bold text-white leading-tight text-balance drop-shadow-lg">
+                <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight text-balance drop-shadow-lg">
                   Master Your{" "}
                   <span className="bg-gradient-to-r from-yellow-300 to-yellow-200 bg-clip-text text-transparent">
                     Financial Future
                   </span>
                 </h1>
-                <p className="text-xl md:text-2xl text-white/90 leading-relaxed max-w-2xl drop-shadow-md font-light">
+                <p className="text-lg sm:text-xl md:text-2xl text-white/90 leading-relaxed max-w-2xl drop-shadow-md font-light">
                   Strategic tax planning, expert accounting, and comprehensive business consulting for discerning
                   clients who demand excellence.
                 </p>
               </div>
 
-              <div className="flex flex-col sm:flex-row gap-4 pt-6">
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-6">
                 <Button
                   onClick={handleScheduleConsultation}
                   size="lg"
-                  className="bg-white hover:bg-white/90 text-primary font-semibold shadow-lg hover:shadow-xl transition-all"
+                  className="bg-white hover:bg-white/90 text-primary font-semibold shadow-lg hover:shadow-xl transition-all w-full sm:w-auto"
                 >
                   Schedule Consultation <ArrowRight size={20} />
                 </Button>
@@ -125,22 +123,22 @@ export default function Hero() {
                   asChild
                   variant="outline"
                   size="lg"
-                  className="bg-white/10 hover:bg-white/20 text-white border-white/40 backdrop-blur-sm font-semibold"
+                  className="bg-white/10 hover:bg-white/20 text-white border-white/40 backdrop-blur-sm font-semibold w-full sm:w-auto"
                 >
                   <a href="#services">Explore Services</a>
                 </Button>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 pt-12">
-                <div className="bg-white/10 backdrop-blur-sm p-4 rounded-xl border border-white/20">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-6 pt-12">
+                <div className="bg-white/10 backdrop-blur-sm p-4 md:p-6 rounded-xl border border-white/20">
                   <p className="text-3xl md:text-4xl font-bold text-yellow-300 mb-1">30+</p>
                   <p className="text-xs md:text-sm text-white/80">Years of Experience</p>
                 </div>
-                <div className="bg-white/10 backdrop-blur-sm p-4 rounded-xl border border-white/20">
+                <div className="bg-white/10 backdrop-blur-sm p-4 md:p-6 rounded-xl border border-white/20">
                   <p className="text-3xl md:text-4xl font-bold text-yellow-300 mb-1">1000+</p>
                   <p className="text-xs md:text-sm text-white/80">Satisfied Clients</p>
                 </div>
-                <div className="bg-white/10 backdrop-blur-sm p-4 rounded-xl border border-white/20">
+                <div className="bg-white/10 backdrop-blur-sm p-4 md:p-6 rounded-xl border border-white/20">
                   <p className="text-3xl md:text-4xl font-bold text-yellow-300 mb-1">99%</p>
                   <p className="text-xs md:text-sm text-white/80">Satisfaction Rate</p>
                 </div>
