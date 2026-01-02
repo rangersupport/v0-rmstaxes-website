@@ -135,36 +135,66 @@
     @apply bg-background text-foreground;
   }
 
-  /* Add custom Calendly widget styling to match brand colors */
+  /* Improved Calendly widget styling for better text contrast and brand colors */
   .calendly-inline-widget {
-    /* Override Calendly default colors to match RMS burgundy brand */
+    /* Light background for better readability */
   }
 
-  .calendly-inline-widget [data-calendly-button-default] {
+  /* Enhanced Calendly theming - burgundy buttons with proper text contrast */
+  .calendly-inline-widget [data-calendly-button-default],
+  .calendly-inline-widget button {
     background-color: #8b3a3a !important;
+    color: #ffffff !important;
+    border: none !important;
   }
 
-  .calendly-inline-widget button,
-  .calendly-inline-widget [role="button"] {
-    background-color: #8b3a3a !important;
-    color: white !important;
+  .calendly-inline-widget button:hover,
+  .calendly-inline-widget [data-calendly-button-default]:hover {
+    background-color: #6d2d2d !important;
   }
 
   .calendly-inline-widget a[href*="calendly"] {
     color: #8b3a3a !important;
   }
 
-  /* Style Calendly header and interactive elements */
-  .calendly-inline-widget .calendly-header-close-button:hover {
-    background-color: #6d2d2d !important;
+  /* Dark text on light backgrounds for maximum readability */
+  .calendly-inline-widget {
+    color: #1a1a1a !important;
   }
 
-  .calendly-inline-widget [data-test="calendar-month-header"] button:hover {
-    background-color: #8b3a3a !important;
+  .calendly-inline-widget h1,
+  .calendly-inline-widget h2,
+  .calendly-inline-widget h3,
+  .calendly-inline-widget label,
+  .calendly-inline-widget p {
+    color: #1a1a1a !important;
   }
 
-  .calendly-inline-widget .calendly-selected {
+  /* Calendar selection - burgundy highlight */
+  .calendly-inline-widget .calendly-selected,
+  .calendly-inline-widget [data-selected="true"] {
     background-color: #8b3a3a !important;
+    color: #ffffff !important;
+  }
+
+  /* Calendar hover effect */
+  .calendly-inline-widget [role="button"]:hover,
+  .calendly-inline-widget [data-attribute*="day"]:hover {
+    background-color: #f5f5f5 !important;
+    color: #1a1a1a !important;
+  }
+
+  /* Form inputs and fields */
+  .calendly-inline-widget input,
+  .calendly-inline-widget textarea,
+  .calendly-inline-widget select {
+    background-color: #ffffff !important;
+    color: #1a1a1a !important;
+    border: 1px solid #e0e0e0 !important;
+  }
+
+  .calendly-inline-widget input::placeholder {
+    color: #999999 !important;
   }
 }
 
