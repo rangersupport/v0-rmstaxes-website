@@ -61,7 +61,9 @@ const services = [
 
 export default function Services() {
   const handleBookConsultation = (calendlyUrl: string) => {
-    window.open(calendlyUrl, "_blank")
+    if (typeof window !== "undefined" && window.Calendly) {
+      window.Calendly.initPopupWidget({ url: calendlyUrl })
+    }
   }
 
   return (

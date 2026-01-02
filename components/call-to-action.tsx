@@ -6,7 +6,11 @@ import Link from "next/link"
 
 export default function CallToAction() {
   const handleScheduleConsultation = () => {
-    window.open("https://calendly.com/rmstaxes/15?hide_gdpr_banner=1&primary_color=8b3a3a", "_blank")
+    if (typeof window !== "undefined" && window.Calendly) {
+      window.Calendly.initPopupWidget({
+        url: "https://calendly.com/rmstaxes/15?hide_gdpr_banner=1&primary_color=8b3a3a",
+      })
+    }
   }
 
   return (
