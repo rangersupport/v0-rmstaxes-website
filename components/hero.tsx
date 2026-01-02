@@ -4,12 +4,6 @@ import { useEffect, useRef, useState } from "react"
 import { Button } from "@/components/ui/button"
 import { ArrowRight } from "lucide-react"
 
-declare global {
-  interface Window {
-    Calendly: any
-  }
-}
-
 export default function Hero() {
   const videoRef = useRef<HTMLVideoElement>(null)
   const [isLoaded, setIsLoaded] = useState(false)
@@ -45,11 +39,7 @@ export default function Hero() {
   }, [])
 
   const handleScheduleConsultation = () => {
-    if (window.Calendly) {
-      window.Calendly.initPopupWidget({
-        url: "https://calendly.com/rmstaxes/15?hide_gdpr_banner=1&primary_color=8b3a3a",
-      })
-    }
+    window.open("https://calendly.com/rmstaxes/15?hide_gdpr_banner=1&primary_color=8b3a3a", "_blank")
   }
 
   return (

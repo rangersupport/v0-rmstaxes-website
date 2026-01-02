@@ -3,6 +3,11 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* Added smooth scroll behavior for hash navigation */
+html {
+  scroll-behavior: smooth;
+}
+
 :root {
   /* Professional Tax Services - RMS Burgundy Brand Palette */
   --background: oklch(0.98 0 0);

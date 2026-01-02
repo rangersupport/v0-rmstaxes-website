@@ -63,7 +63,7 @@ export default function Header() {
             <Link href="#contact">Sign In</Link>
           </Button>
           <Button asChild className="bg-primary hover:bg-primary/90 text-white font-semibold">
-            <Link href="#calendly">Book Now</Link>
+            <Link href="#services">Book Now</Link>
           </Button>
         </div>
 
@@ -95,7 +95,7 @@ export default function Header() {
                 <Link href="#contact">Sign In</Link>
               </Button>
               <Button asChild size="sm" className="bg-primary hover:bg-primary/90 text-white font-semibold">
-                <Link href="#calendly">Book Now</Link>
+                <Link href="#services">Book Now</Link>
               </Button>
             </div>
           </nav>

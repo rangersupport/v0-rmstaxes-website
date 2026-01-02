@@ -5,12 +5,6 @@ import { Button } from "@/components/ui/button"
 import { Calculator, TrendingUp, Briefcase, FileText, Shield, Users } from "lucide-react"
 import Link from "next/link"
 
-declare global {
-  interface Window {
-    Calendly: any
-  }
-}
-
 const services = [
   {
     icon: Calculator,
@@ -67,11 +61,7 @@ const services = [
 
 export default function Services() {
   const handleBookConsultation = (calendlyUrl: string) => {
-    if (window.Calendly) {
-      window.Calendly.initPopupWidget({
-        url: calendlyUrl,
-      })
-    }
+    window.open(calendlyUrl, "_blank")
   }
 
   return (
